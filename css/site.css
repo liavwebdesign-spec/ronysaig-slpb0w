@@ -420,3 +420,14 @@ section{padding:var(--sec) var(--gutter)}
 .inner h1{font-size:var(--fs-h2);line-height:1.2}
 .inner .sec-head p{font-size:var(--fs-body);line-height:1.68}
 .inner-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:8px}
+
+/* ---------- צילום (סטוק Magnific בסקיצה, 5.10.2026): אותו סט כמו ב-V2, מילוי מסגרת ---------- */
+.shot{margin:0;border-radius:12px;overflow:hidden;aspect-ratio:16/9;background:var(--surface-muted)}
+.shot img{width:100%;height:100%;object-fit:cover}
+.area .shot{margin-bottom:8px}
+.g-card .shot{aspect-ratio:16/8}
+.check .shot.wide{width:min(100%, 1100px);aspect-ratio:21/8;margin:0 auto var(--gap-l);border-radius:var(--r-card)}
+.check .shot.wide img{object-position:50% 40%}
+/* הסוגר: העיר בלילה מאחורי רצועת הנייבי, בשכבה שמשאירה את הטקסט הלבן קריא */
+.talk{background:linear-gradient(to bottom, rgba(30,55,105,.94), rgba(30,55,105,.78) 45%, rgba(30,55,105,.9)),url("../assets/stock/city.webp") center 60%/cover no-repeat}
+@media (max-width:767px){.check .shot.wide{aspect-ratio:16/10}}
