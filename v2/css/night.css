@@ -1,0 +1,99 @@
+/* =====================================================================================================
+   V2 · לילה טכנולוגי (5.10.2026, ליאב: "נלך על לילה טכנולוגי"). נטען אחרי site.css: אותו קופי, אותו מבנה,
+   אותה התנהגות. שפה: כהה (MV:s13) בגרסה טכנולוגית: קרקע כמעט שחורה בנגיעת נייבי, דיו בהיר, CTA בהיר
+   (לא צבעוני), הזהב רק בנקודה. בלי סריף ובלי שמנת, כדי שלא ייראה כמו סברדלוב. הפרדה במשטח ובאור.
+   ===================================================================================================== */
+:root{
+  --bg:#0A0E17; --surface:#0A0E17; --surface-muted:#121826; --surface-2:#070A11; --lift:#161D2D;
+  --ink:#EEF1F6; --muted:#9AA3B5; --muted-strong:#B7BFCD;
+  --border-2:rgba(238,241,246,.22); --line:rgba(238,241,246,.12);
+  --accent:#DCE3EF; --accent-text:#D3DCEB; --btn-solid:#F2F5FA; --btn-hover:#FFFFFF; --on-btn:#0A0E17;
+  --tint-12:rgba(220,227,239,.12); --tint-4:rgba(220,227,239,.05);
+  --state-bg:#1B2233; --state-bg-w:#1B2233;
+  --on-accent:#EEF1F6; --on-accent-soft:rgba(238,241,246,.8);
+  --glow:rgba(79,110,190,.22);
+}
+html{background:var(--bg);color-scheme:dark}
+body{color:var(--ink)}
+::selection{background:rgba(194,147,47,.35)}
+.btn{color:var(--on-btn)}
+.btn-2{background:transparent;color:var(--ink);border-color:var(--border-2)}
+@media (hover:hover) and (pointer:fine){.btn-2:hover{background:var(--state-bg);border-color:rgba(238,241,246,.4)}}
+.skip{background:var(--btn-solid);color:var(--on-btn)}
+
+/* הדר: גלולה מזכוכית כהה. הטבעת בלוגו היא חוגה: מסתובבת עם הגלילה ונסגרת בסוגר */
+.hd{color:var(--ink)}
+.hd::before{background:color-mix(in srgb, #0B1019 72%, transparent);border-color:var(--line);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.hd.is-scrolled::before{background:color-mix(in srgb, #0B1019 90%, transparent);box-shadow:0 16px 40px rgba(0,0,0,.45)}
+.brand{color:var(--ink)}
+.hd-nav a{color:var(--muted-strong)}
+@media (hover:hover) and (pointer:fine){.hd-nav a:hover{color:var(--ink);background:var(--state-bg)}}
+.burger{background:var(--tint-12);color:var(--ink)}
+.md-scrim{background:rgba(0,0,0,.6)}
+.md-panel{background:var(--surface-muted);box-shadow:0 0 48px rgba(0,0,0,.5)}
+.md-close{background:var(--tint-12);color:var(--ink)}
+.md-link{color:var(--ink)}
+
+/* הירו: בלי קופסה. רשת נקודות דקה כמו לוח מעגלים, והטבעת כמסך של מכשיר עם הילה אחת מאחוריה */
+.hero{position:relative;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(rgba(238,241,246,.10) 1px, transparent 1.4px) 0 0/28px 28px;
+  -webkit-mask-image:radial-gradient(ellipse 60% 70% at 30% 50%, #000 0%, transparent 72%);mask-image:radial-gradient(ellipse 60% 70% at 30% 50%, #000 0%, transparent 72%)}
+.stage{background:none;position:relative;isolation:isolate;padding:0}
+.stage::before{content:"";position:absolute;z-index:-1;inset-inline:10%;top:-6%;height:62%;border-radius:50%;
+  background:radial-gradient(closest-side, var(--glow), transparent 75%);pointer-events:none}
+.ring{width:clamp(150px, min(21vw, 33vh), 380px)}
+.ring .r-arc{stroke:var(--ink)}
+.door{background:var(--surface-muted);color:var(--ink)}
+.door[aria-pressed="true"]{background:var(--lift);box-shadow:inset 0 0 0 1.5px var(--accent)}
+@media (hover:hover) and (pointer:fine){.door:hover{background:var(--state-bg)}.door[aria-pressed="true"]:hover{background:var(--lift)}}
+.swap .quick a{color:var(--accent-text)}
+
+/* משטחים: גוון שני נמס משני הקצוות, על קרקע אחת (QA 0ד, נאכף בעור כהה) */
+.tone{background:linear-gradient(to bottom, transparent, var(--surface-2) 30%, var(--surface-2) 70%, transparent)}
+.area,.g-card{background:var(--surface-muted)}
+@media (hover:hover) and (pointer:fine){a.g-card:hover{background:var(--state-bg)}}
+.q-opt{background:var(--surface-muted);color:var(--ink)}
+.q-opt[aria-pressed="true"]{background:var(--lift);box-shadow:inset 0 0 0 1.5px var(--accent)}
+@media (hover:hover) and (pointer:fine){.q-opt:hover{background:var(--state-bg)}.q-opt[aria-pressed="true"]:hover{background:var(--lift)}}
+.q-prog i{background:rgba(238,241,246,.18)}
+.result{background:var(--surface-muted)}
+.w-bar{background:rgba(238,241,246,.1)}
+.w-bar i{background:linear-gradient(to left, var(--ink), #C2932F)}
+.g-tag{background:var(--tint-12);color:var(--accent-text)}
+.portrait{isolation:isolate}
+.portrait .pic{background:#fff}
+.portrait::before{content:"";position:absolute;inset:-6%;z-index:-1;border-radius:50%;background:radial-gradient(closest-side, var(--glow), transparent 70%)}
+
+/* הסוגר: לא רצועה צבעונית אלא חדר כהה עם אור אחד */
+.talk{position:relative;isolation:isolate;background:linear-gradient(to bottom, transparent, var(--surface-2) 30%, var(--surface-2) 70%, transparent)}
+.talk::before{content:"";position:absolute;z-index:-1;inset-inline:15%;top:10%;height:55%;border-radius:50%;background:radial-gradient(closest-side, var(--glow), transparent 75%);pointer-events:none}
+.talk .kicker .mark{color:var(--accent)}
+.gate{background:var(--surface-muted)}
+.gate.is-mine{box-shadow:inset 0 0 0 1.5px var(--accent)}
+.gate .btn{background:var(--btn-solid);color:var(--on-btn)}
+@media (hover:hover) and (pointer:fine){.gate .btn:hover{background:#fff}}
+.field label{color:var(--ink)}
+.field input,.field select{background-color:transparent;color:var(--ink);border-color:var(--border-2)}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%23EEF1F6' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E")}
+.field select option{background:#121826;color:#EEF1F6}
+.field input:focus,.field select:focus{border-color:#C2932F;box-shadow:0 0 0 3px rgba(194,147,47,.25)}
+.consent a{color:var(--ink)}
+.f-msg{color:var(--ink)}
+.prep-h{color:var(--ink)!important}
+.tlink.on-dark{color:var(--ink)}
+
+/* פוטר: על אותה קרקע, בלי רקע משלו */
+.ft{background:none}
+.ft-col .ic{color:var(--accent)}
+
+.mbar{background:color-mix(in srgb, #0B1019 88%, transparent);box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.fab-a11y{background:var(--lift);color:var(--ink);box-shadow:inset 0 0 0 1.5px rgba(238,241,246,.55)}
+@media (hover:hover) and (pointer:fine){.fab-a11y:hover{background:var(--state-bg)}}
+.a11y-panel{background:var(--surface-muted);box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.a11y-x{background:var(--tint-12);color:var(--ink)}
+.a11y-opts button{background:var(--lift);color:var(--ink)}
+.a11y-opts button[aria-pressed="true"]{background:var(--btn-solid);color:var(--on-btn)}
+@media (hover:hover) and (pointer:fine){.a11y-opts button:hover{background:var(--state-bg)}.a11y-opts button[aria-pressed="true"]:hover{background:#fff}}
+.a11y-foot a{color:var(--ink)}
+.a11y-contrast{--bg:#000;--surface-muted:#000;--surface-2:#000;--lift:#000}
