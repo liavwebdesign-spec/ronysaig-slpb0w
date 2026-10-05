@@ -97,3 +97,17 @@ body{color:var(--ink)}
 @media (hover:hover) and (pointer:fine){.a11y-opts button:hover{background:var(--state-bg)}.a11y-opts button[aria-pressed="true"]:hover{background:#fff}}
 .a11y-foot a{color:var(--ink)}
 .a11y-contrast{--bg:#000;--surface-muted:#000;--surface-2:#000;--lift:#000}
+
+/* ---------- צילום (סטוק Magnific בסקיצה, 5.10.2026): סט אחד בגריידינג לילה קריר, מילוי מסגרת ---------- */
+.shot{margin:0;border-radius:12px;overflow:hidden;aspect-ratio:16/9;background:var(--lift)}
+.shot img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.04)}
+.area .shot{margin-bottom:8px}
+.g-card .shot{aspect-ratio:16/8}
+.check .shot.wide{width:min(100%, 1100px);aspect-ratio:21/8;margin:0 auto var(--gap-l);border-radius:var(--r-card)}
+.check .shot.wide img{object-position:50% 40%}
+/* הסוגר: תל אביב בלילה מאחורי שני הערוצים, עם שכבת קריאות מכל הכיוונים */
+.talk{background:
+  linear-gradient(to bottom, var(--bg), rgba(10,14,23,.56) 24%, rgba(10,14,23,.74) 70%, var(--bg)),
+  url("../assets/stock/city.webp") center 60%/cover no-repeat}
+.talk::before{display:none}
+@media (max-width:767px){.check .shot.wide{aspect-ratio:16/10}}
