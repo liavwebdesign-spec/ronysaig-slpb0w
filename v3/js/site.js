@@ -113,10 +113,19 @@
   function choose(k, quiet) {
     doors.forEach(function (b) { var on = b.dataset.side === k; b.setAttribute("aria-pressed", String(on)); turn(b.closest(".t-door"), on); });
     $$(".gate").forEach(function (g) { g.classList.toggle("is-mine", g.dataset.gate === k); });
-    try { localStorage.setItem("rony-side", k); } catch (e) {}
-    if (!quiet) { track(k === "biz" ? "side_business" : "side_private"); var fb = $("#back-" + k + " .btn"); if (fb) setTimeout(function () { fb.focus({ preventScroll: true }); }, RM ? 0 : 650); }
+    if (k) try { localStorage.setItem("rony-side", k); } catch (e) {}
+    if (!quiet && k) { track(k === "biz" ? "side_business" : "side_private"); var fb = $("#back-" + k + " .btn"); if (fb) setTimeout(function () { fb.focus({ preventScroll: true }); }, RM ? 0 : 650); }
   }
   doors.forEach(function (b) { b.addEventListener("click", function () { choose(b.dataset.side); }); });
+  // "חזרה" בגב הדלת: שתי הדלתות חוזרות לפנים, והפוקוס חוזר לדלת שנבחרה
+  $$(".d-back").forEach(function (x) {
+    x.addEventListener("click", function () {
+      var d = x.closest(".t-door").querySelector(".door");
+      choose(null, true);
+      try { localStorage.removeItem("rony-side"); } catch (e) {}
+      setTimeout(function () { d.focus({ preventScroll: true }); }, RM ? 0 : 650);
+    });
+  });
   $$(".face.back").forEach(function (x) { x.setAttribute("inert", ""); });
 
   /* ---------- פנס הסמן על האריחים ---------- */
