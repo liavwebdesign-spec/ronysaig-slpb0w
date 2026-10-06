@@ -97,6 +97,9 @@
     reveals.forEach(function (el) { io.observe(el); });
   } else reveals.forEach(function (el) { el.classList.add("is-in"); });
 
+  /* ---------- ?notes: שורות שמחכות לאישור רוני מקבלות קו מקווקו (לליאב; בכתובת הרגילה לא רואים) ---------- */
+  if (/[?&]notes(=|&|$)/.test(location.search)) document.documentElement.classList.add("show-notes");
+
   /* ---------- 01: רגע החתימה של V3. הדלת שבוחרים מתהפכת ומראה בגב שלה מה רלוונטי ---------- */
   var doors = $$(".door");
   // ההיפוך: חצי סיבוב עד שהאריח עומד על הצד, החלפת הפנים, וחצי סיבוב חזרה. במנוחה תמיד פנים אחד בלבד
@@ -212,7 +215,7 @@
       var msg = "היי רוני, " + SAY[ans.stage] + ", " + SAY[ans.equity] + ", " + SAY[ans.when] + ". אשמח לדבר.";
       swapTo('<div class="result"><h3 id="q-res" tabindex="-1">מה חשוב לבדוק אצלכם</h3><ul>' + lines.map(function (l) { return "<li><span>" + l + "</span></li>"; }).join("") + "</ul>" +
         '<a class="btn btn-lg" data-wa-done href="' + wa(msg) + '" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-whatsapp"/></svg>לשלוח לי את המצב בוואטסאפ</a>' +
-        '<p class="fine">ההודעה כבר כוללת את התשובות שלכם, אז לא צריך להסביר מההתחלה.</p>' +
+        '<p class="fine">ההודעה כבר כוללת את התשובות, אז לא צריך להסביר מההתחלה.</p>' +
         '<p class="fine">המידע כאן כללי ואינו ייעוץ משפטי. כל מקרה נבדק לגופו.</p></div>',
         function () {
           $("#q-res", panel).focus({ preventScroll: true });
@@ -264,12 +267,18 @@
   var bar = $("#mbar");
   if (bar && "IntersectionObserver" in window) {
     var past = false, near = {};
-    var bset = function () { bar.classList.toggle("is-on", past && !near.talk && !near.ft); };
+    var seen = new Set();
+    var bset = function () { bar.classList.toggle("is-on", past && !near.talk && !near.ft && !seen.size); };
     new IntersectionObserver(function (en) { past = !en[0].isIntersecting; bset(); }).observe($(".hero"));
     // יורד כשהסוגר (אותן פעולות) או הפוטר על המסך
     [["talk", "#talk"], ["ft", ".ft"]].forEach(function (x) {
       new IntersectionObserver(function (en) { near[x[0]] = en[0].isIntersecting; bset(); }, { rootMargin: "0px 0px -10% 0px" }).observe($(x[1]));
     });
+    // וגם כשכפתור עם אותה פעולה (פגישת ייעוץ או וואטסאפ) נמצא על המסך בתוך העמוד
+    var dup = new IntersectionObserver(function (en) {
+      en.forEach(function (e) { if (e.isIntersecting) seen.add(e.target); else seen.delete(e.target); }); bset();
+    });
+    $$('main a.btn[href="#talk"], main [data-wa]').forEach(function (b) { if (!b.closest(".hero")) dup.observe(b); });
   }
 
   $$("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
